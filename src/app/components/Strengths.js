@@ -57,7 +57,15 @@ const Strengths = () => {
 
   return (
     <section id="services" className="w-full py-12 md:py-16 lg:py-20 bg-gray-50 font-heading">
+       <div className='text-center flex flex-col gap-2 mb-8'>
+          <h2 className='text-center font-bold text-3xl'>At a Glance</h2>
+          <p className='text-lg font-semibold leading-relaxed'>Trusted by IVF clinics, gynecologist and IVF specialist doctors & distributors across India
+
+          </p>
+        </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 ">
+
+       
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {strengths.map((strength, index) => (
@@ -71,20 +79,20 @@ const Strengths = () => {
               />
 
               {/* 2. The Content (Must be relative z-10 to sit on top of the animation) */}
-              <div className="relative z-10 p-8 md:p-10 flex flex-col items-center text-center">
+              <div className="relative z-10 p-4 md:p-4 flex flex-col items-center text-center">
                 
                 {/* Icon: Changes color on hover */}
-                <div className={`mb-6 md:mb-8 transition-colors duration-300 text-[#049fe5] group-hover:text-white`}>
+                <div className={`mb-4 md:mb-4 transition-colors duration-300 text-[#049fe5] group-hover:text-white`}>
                   {strength.icon}
                 </div>
 
                 {/* Title: Changes color on hover */}
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 text-gray-800 transition-colors duration-300 group-hover:text-white font-poppins font-poppins">
+                <h3 className="text-xl md:text-2xl lg:text-2xl font-bold mb-4 md:mb-4 text-gray-800 transition-colors duration-300 group-hover:text-white font-poppins font-poppins">
                   {strength.title}
                 </h3>
 
                 {/* Description: Changes color on hover */}
-                <p className="text-sm md:text-base lg:text-lg leading-relaxed text-gray-600 transition-colors duration-300 group-hover:text-white group-hover:opacity-90 font-poppins">
+                <p className="text-sm md:text-base lg:text-md leading-relaxed text-gray-600 transition-colors duration-300 group-hover:text-white group-hover:opacity-90 font-poppins">
                   {strength.description}
                 </p>
               </div>

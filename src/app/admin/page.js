@@ -184,6 +184,22 @@ const ProductsView = () => {
         { id: 5, name: 'Digital Thermometer', category: 'Equipment', price: '$15.00', stock: 30, status: 'In Stock' },
     ];
 
+    const [modal, setModal] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        description:"",
+        packageInfo: ""
+    })
+
+    // const handleSubmit = ()=>{
+    //     try{
+
+    //     }
+    //     catch(error){
+
+    //     }
+    // }
+
     return (
         <div className="space-y-6 animate-fade-in"> {/* Simple fade-in animation */}
             
@@ -199,8 +215,26 @@ const ProductsView = () => {
                 </div>
                 <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                     <Plus size={20} />
-                    <span>Add Product</span>
+                    <span onClick={() => setModal(true)}>Add Product</span>
                 </button>
+                <div className=''>
+                    {modal && (
+                        <div className=''>
+                            <form>
+                                <div>
+                                    <input placeholder='Enter the name of the medicine' onChange={(e) => setFormData({...formData, name: e.target.value})}/>
+                                </div>
+                                <div>
+                                    <input onChange={(e) => setFormData({...formData, description: e.target.value})}/>
+                                </div>
+                                <div>
+                                    <input onChange={(e) => setFormData({...formData, packageInfo: e.target.value})}/>
+                                </div>
+                                <button type='submit'>Submit</button>
+                            </form>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {/* The Table */}
@@ -320,7 +354,192 @@ const ActionCard = ({ title, desc, icon }) => (
 
 export default Page
 
+// "use client"
 
+// import React, { useState } from 'react'
 
+// // FIX 1: Component names MUST start with a Capital Letter (Page, not page)
+// const Page = () => {
+//     const [activeTab, setActiveTab] = useState("Dashboard")
+//     const [modal, setModal] = useState(false);
 
+//     const [formData, setFormdata] = useState({
+//         name: "",
+//         description: "",
+//         image: "",
+//         packageInfo: ""
+//     });
 
+//     const handleChange = (e) => {
+//         const { name, value } = e.target;
+//         setFormdata((prev) => ({
+//             ...prev,
+//             [name]: value
+//         }))
+//     }
+
+//     const handleSubmit = async (e) => {
+//         // This stops the page from refreshing. CRITICAL.
+//         e.preventDefault(); 
+        
+//         try {
+//             const response = await fetch("/api/products", {
+//                 method: "POST",
+//                 headers: {
+//                     // FIX 2: Standard capitalization is 'Content-Type'
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify(formData)
+//             })
+            
+//             if (response.ok) {
+//                 alert("Product Added Successfully")
+//                 setModal(false)
+//                 setFormdata({ name: "", description: "", image: "", packageInfo: "" })
+//             } else {
+//                 // Read the error message from the server if it fails
+//                 const errorData = await response.json();
+//                 console.error("Failed to add Product:", errorData);
+//                 alert("Failed: " + (errorData.error || "Unknown Error"));
+//             }
+
+//         } catch (error) {
+//             console.error("Error Submitting form: ", error)
+//         }
+//     }
+
+//     return (
+//         <div className='flex h-screen'>
+//             <aside className='w-64 bg-gray-500 text-white'>
+//                 <div className="p-4 font-bold text-xl">Admin Panel</div>
+//                 <nav className='flex flex-col gap-2 mt-4'>
+//                     <div className={`p-3 cursor-pointer ${activeTab === "Dashboard" ? "bg-gray-700" : "hover:bg-gray-600"}`} onClick={() => setActiveTab("Dashboard")}>Dashboard</div>
+//                     <div className={`p-3 cursor-pointer ${activeTab === "Products" ? "bg-gray-700" : "hover:bg-gray-600"}`} onClick={() => setActiveTab("Products")}>Products</div>
+//                     <div className='p-3 cursor-pointer hover:bg-gray-600'>Blogs</div>
+//                 </nav>
+//             </aside>
+            
+//             <main className="flex-1 overflow-y-auto">
+//                 <div className='p-8'>
+//                     {activeTab === 'Products' && (
+//                         <div>
+//                             <div className="flex justify-between items-center mb-6">
+//                                 <h1 className="text-2xl font-bold">Products List</h1>
+//                                 <button 
+//                                     onClick={() => setModal(true)}
+//                                     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+//                                 >
+//                                     + Add Product
+//                                 </button>
+//                             </div>
+
+//                             {/* Table Placeholder */}
+//                             <div className="bg-white rounded shadow overflow-hidden">
+//                                 <table className="w-full">
+//                                     <thead className="bg-gray-50 border-b border-gray-200">
+//                                         <tr>
+//                                             <th className="p-4 text-left text-sm font-semibold text-gray-600">Product Name</th>
+//                                             <th className="p-4 text-left text-sm font-semibold text-gray-600">Description</th>
+//                                             <th className="p-4 text-left text-sm font-semibold text-gray-600">Image</th>
+//                                             <th className="p-4 text-left text-sm font-semibold text-gray-600">Package Info</th>
+//                                         </tr>
+//                                     </thead>
+//                                     <tbody>
+//                                         {/* You can map your products here later */}
+//                                         <tr>
+//                                             <td className="p-4 text-sm text-gray-500" colSpan="4">No products found.</td>
+//                                         </tr>
+//                                     </tbody>
+//                                 </table>
+//                             </div>
+
+//                             {/* MODAL */}
+//                             <div className='relative'>
+//                                 {modal && (
+//                                     <div
+//                                         className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+//                                         onClick={() => setModal(false)}
+//                                     >
+//                                         <form
+//                                             className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md space-y-4"
+//                                             onClick={(e) => e.stopPropagation()}
+//                                             onSubmit={handleSubmit}
+//                                         >
+//                                             <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">Add New Product</h2>
+
+//                                             <div>
+//                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+//                                                 <input
+//                                                     name='name'
+//                                                     value={formData.name}
+//                                                     onChange={handleChange}
+//                                                     className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+//                                                     placeholder='Enter product name'
+//                                                     required
+//                                                 />
+//                                             </div>
+
+//                                             <div>
+//                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+//                                                 <input
+//                                                     name="description"
+//                                                     value={formData.description}
+//                                                     onChange={handleChange}
+//                                                     className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+//                                                     placeholder='Enter description'
+//                                                     required
+//                                                 />
+//                                             </div>
+
+//                                             <div>
+//                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Image Path</label>
+//                                                 <input
+//                                                     name="image"
+//                                                     value={formData.image}
+//                                                     onChange={handleChange}
+//                                                     className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+//                                                     placeholder='Enter image path'
+//                                                     required
+//                                                 />
+//                                             </div>
+
+//                                             <div>
+//                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Package Info</label>
+//                                                 <input
+//                                                     name="packageInfo"
+//                                                     value={formData.packageInfo}
+//                                                     onChange={handleChange}
+//                                                     className="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+//                                                     placeholder='Enter package info'
+//                                                     required
+//                                                 />
+//                                             </div>
+
+//                                             <div className="flex justify-end space-x-3 pt-4">
+//                                                 <button
+//                                                     type="button"
+//                                                     onClick={() => setModal(false)}
+//                                                     className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+//                                                 >
+//                                                     Cancel
+//                                                 </button>
+//                                                 <button
+//                                                     type="submit"
+//                                                     className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+//                                                 >
+//                                                     Add Product
+//                                                 </button>
+//                                             </div>
+//                                         </form>
+//                                     </div>
+//                                 )}
+//                             </div>
+//                         </div>
+//                     )}
+//                 </div>
+//             </main>
+//         </div>
+//     )
+// }
+
+// export default Page

@@ -13,16 +13,16 @@ const page = () => {
       moreText: "From product formulation and development to packaging and timely delivery, we handle the entire process with professionalism and precision. We offer flexible batch sizes, competitive pricing, and full transparency, making us a trusted partner for startups, growing brands, and established pharmaceutical companies alike. Whether you are looking to launch new products under your brand name or scale up existing ones, our third-party manufacturing services provide the support and infrastructure you need to succeed in a competitive market.",
       colorClass: "group-hover:bg-[#049fe5]"
     },
-    {
-      image: "/DwepsServiceImage2.png",
-      title: "Franchisee",
-      description: "DWEPS Pharmaceutical Pvt. Ltd. invites dynamic and growth-oriented individuals and businesses to become part of our expanding pharmaceutical network through our franchisee program. We offer a lucrative opportunity to operate under the trusted DWEPS brand, providing a wide range of high-quality pharmaceutical products across multiple therapeutic categories.",
-      moreText: "As a franchisee, you benefit from exclusive marketing rights, competitive pricing, promotional support, timely product delivery, and consistent quality assurance. Our dedicated support team ensures smooth onboarding, operational guidance, and ongoing assistance to help you succeed in your territory. Join hands with DWEPS and become a part of our mission to deliver accessible and effective healthcare solutions across India. Let’s grow together in the booming pharmaceutical sector.",
-      colorClass: "group-hover:bg-[#049fe5]"
-    },
+    // {
+    //   image: "/DwepsServiceImage2.png",
+    //   title: "Franchisee",
+    //   description: "DWEPS Pharmaceutical Pvt. Ltd. invites dynamic and growth-oriented individuals and businesses to become part of our expanding pharmaceutical network through our franchisee program. We offer a lucrative opportunity to operate under the trusted DWEPS brand, providing a wide range of high-quality pharmaceutical products across multiple therapeutic categories.",
+    //   moreText: "As a franchisee, you benefit from exclusive marketing rights, competitive pricing, promotional support, timely product delivery, and consistent quality assurance. Our dedicated support team ensures smooth onboarding, operational guidance, and ongoing assistance to help you succeed in your territory. Join hands with DWEPS and become a part of our mission to deliver accessible and effective healthcare solutions across India. Let’s grow together in the booming pharmaceutical sector.",
+    //   colorClass: "group-hover:bg-[#049fe5]"
+    // },
     {
       image: "/DwepsServiceImage3.png",
-      title: "Distributor",
+      title: "Ethical Distributor",
       description: "DWEPS Pharmaceutical Pvt. Ltd. operates a robust and efficient distribution network that ensures timely and seamless delivery of our pharmaceutical products across India. Our well-structured logistics system is designed to meet the diverse needs of hospitals, clinics, pharmacies, and medical institutions, even in remote and rural areas.",
       moreText: "We partner with reliable distributors and stockists, enabling swift product availability and maintaining consistent supply chains. Every shipment is managed with precision, adhering to strict quality and safety standards to ensure product integrity from our facilities to the end user. Our commitment to efficient distribution is a key pillar of our promise to make high-quality, affordable healthcare accessible to all.",
       colorClass: "group-hover:bg-[#049fe5]"
@@ -90,7 +90,7 @@ const page = () => {
     <section id="services" className="w-full py-12 md:py-16 lg:py-20 bg-gray-50 font-heading">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-2 ">
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {strengths.map((strength, index) => (
             <div
               key={index}

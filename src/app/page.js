@@ -17,8 +17,8 @@ const page = () => {
       
       <HeroSection />
       <About />
-      <Blogs />
       <Products />
+      <Blogs />
       <Strengths />
       <WhyChooseUs />
       <Numbers/>

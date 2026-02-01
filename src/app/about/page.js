@@ -59,105 +59,163 @@ const page = () => {
     </div>
 
     </section>
-    
-          <section id="about" className="w-full mt-8 font-heading">
-              
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-8">
-          
-                  <div className="grid grid-cols-1 lg:grid-cols-2  lg:gap-12 items-center">
-                      {/* Left Side - Text Content */}
-                      <div className='flex flex-col gap-6'>
-                        <div><h2 className='text-2xl md:text-2xl lg:text-2xl font-bold text-[#049fe5] '>About DWEPS Pharmaceutical Pvt. Ltd.</h2></div>
-                       <div className='flex flex-col gap-6 text-md'>
-                         <p>Dweps Pharmaceutical Pvt. Ltd. is a forward-thinking Indian pharmaceutical company established in 2016,Since its inception, the company has been dedicated to delivering innovative, high-quality, and affordable healthcare solutions that improve and extend lives.
-                          </p>
-<p>
-Specializing in the development, manufacturing, and marketing of a wide range of pharmaceutical formulations, DWEPS caters to diverse therapeutic segments, including general medicine, pediatrics, dermatology, gynecology, and chronic disease management. Our products undergo rigorous quality control processes and are formulated to meet both national and international regulatory standards.
-</p>
-<p>
-Driven by a mission to enhance healthcare accessibility across India, we leverage advanced technologies, a skilled R&D team, and a robust distribution network to ensure timely and consistent delivery of safe and effective medicines. Our operations are guided by a commitment to ethical practices, continuous improvement, and patient-centric innovation.
-</p>
-<p>
-With a growing portfolio and expanding footprint, DWEPS Pharmaceutical Pvt. Ltd. is poised to emerge as a trusted name in both domestic and global pharmaceutical markets.</p>
-                       </div>
-                      </div>
+     <section className='max-w-6xl items-center font-heading justify-center mx-auto mb-8 '>
+       <div className="text-center mt-4 mb-4 ">
+    {/* 1. 'inline-block' makes the box only as wide as the text */}
+    {/* 2. 'relative group' allows us to position the line relative to this specific text */}
+    <h2 className="relative group inline-block font-heading font-bold text-2xl ">
+        
+        About DwepsPharma Pvt. Ltd.
+        
+        {/* The Animated Underline */}
+        {/* 'absolute bottom-0' places it at the very bottom of the text */}
+        {/* 'left-0 w-full' ensures it matches the text width exactly */}
+        {/* 'h-0.5' sets a nice thickness (2px) */}
+        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+    </h2>
+    </div>
+
+        <div>
+            <div className="flex flex-col gap-6 text-justify text-gray-800 leading-relaxed px-4">
   
-                      {/* Right Side - Image */}
-                      <div className="relative w-full h-[600px] md:h-[500px] lg:h-[400px] rounded-lg overflow-hidden shadow-lg">
-                          <Image
-                              src="/about.jpg"
-                              alt="Pharmaceutical products and medical supplies"
-                              fill
-                              className="object-contain"
-                              priority
-                          />
-                      </div>
+  {/* Paragraph 1 */}
+  <div>
+    <p>
+      Established in 2016, DWEPS Pharmaceutical Pvt. Ltd. is a forward-thinking Indian pharmaceutical company headquartered in Jamshedpur, Jharkhand, with a growing corporate footprint. Since our inception, we have been steadfast in our dedication to delivering innovative, high-quality, and affordable healthcare solutions that improve and extend lives across the nation.
+    </p>
+  </div>
 
-                      {/* Card Design */}
-                      <div className='col-span-1 lg:col-span-2 flex flex-col gap-12 mt-8'>
-                        {/* Card 1 - Our Mission (Image Left, Text Right) */}
-                        <div className='group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white'>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-0'>
-                                {/* Image Section */}
-                                <div className='relative h-64 md:h-auto overflow-hidden'>
-                                    <Image
-                                        src="/aboutOurMission.jpg"
-                                        alt="Our Mission"
-                                        fill
-                                        className="object-contain group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                                
-                                {/* Text Section */}
-                                <div className='bg-white p-8 md:p-10 flex flex-col justify-center'>
-                                    {/* Title */}
-                                    <h2 className='text-2xl md:text-2xl font-bold text-[#049fe5] mb-4'>Our Mission</h2>
-                                    
-                                    {/* Divider */}
-                                    <div className='w-16 h-1 bg-[#049fe5]/40 group-hover:w-24 transition-all duration-500 mb-6'></div>
-                                    
-                                    {/* Description */}
-                                    <p className='text-gray-700 text-base md:text-base leading-relaxed'>
-                                        To provide innovative, effective, and affordable medical solutions that enhance the quality of life. We are committed to delivering high-quality pharmaceutical products that meet international standards while remaining accessible to all.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+  {/* Paragraph 2 */}
+  <div>
+    <p>
+      <span className="font-bold text-black block mb-1">Visionary Leadership & Expertise</span>
+      Under the dynamic leadership of our directors, Mr. Vishal Sachdev and Ms. Ekta Chachra, DWEPS has evolved from a promising entrant into a robust player in the pharmaceutical landscape. Their strategic vision drives our mission to bridge the gap between advanced medical science and accessible patient care.
+    </p>
+  </div>
 
-                        {/* Card 2 - Our Vision (Text Left, Image Right) */}
-                        <div className='group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white'>
-                            <div className='grid grid-cols-1 md:grid-cols-2 gap-0'>
-                                {/* Text Section */}
-                                <div className='bg-white p-8 md:p-10 flex flex-col justify-center order-2 md:order-1'>
-                                    {/* Title */}
-                                    <h2 className='text-2xl md:text-2xl font-bold text-[#1a237e] mb-4'>Our Vision</h2>
-                                    
-                                    {/* Divider */}
-                                    <div className='w-16 h-1 bg-[#1a237e]/40 group-hover:w-24 transition-all duration-500 mb-6'></div>
-                                    
-                                    {/* Description */}
-                                    <p className='text-gray-700 text-base md:text-base leading-relaxed'>
-                                        To be recognized as a trusted name in the Indian pharmaceutical industry for excellence in women's health, dermatology, and general medicine. We aspire to become a leading healthcare provider known for quality and innovation.
-                                    </p>
-                                </div>
-                                
-                                {/* Image Section */}
-                                <div className='relative h-64 md:h-auto overflow-hidden order-1 md:order-2'>
-                                    <Image
-                                        src="/aboutOurVision.avif"
-                                        alt="Our Vision"
-                                        fill
-                                        className="object-contain group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
-          <WhyChooseUs/>
-          <Numbers/>
+  {/* Paragraph 3 */}
+  <div>
+    <p>
+      <span className="font-bold text-black block mb-1">Comprehensive Therapeutic Portfolio</span>
+      Specializing in the development, manufacturing, and marketing of a wide range of pharmaceutical formulations, DWEPS caters to diverse and critical therapeutic segments. While we are renowned for our solutions , Pediatrics, Dermatology, and Gynecology, we have also established a strong niche in:
+    </p>
+    {/* List moved OUTSIDE the <p> tag for valid HTML and perfect alignment */}
+    <ol className="list-decimal list-outside pl-5 flex flex-col gap-2 mt-2">
+      <li className="pl-1">
+        <strong>Critical Care:</strong> High-efficacy injectables including anti-infectives and antibiotics (e.g., Tigecycline, Aztreonam).
+      </li>
+      <li className="pl-1">
+        <strong>Dental Solutions:</strong> Innovative dental chairs and equipment.
+      </li>
+      <li className="pl-1">
+        <strong>Chronic Disease Management:</strong> Targeted therapies for long-term patient wellness.
+      </li>
+    </ol>
+  </div>
+
+  {/* Paragraph 4 */}
+  <div>
+    <p>
+      <span className="font-bold text-black block mb-1">Commitment to Quality & Safety</span>
+      Our products undergo rigorous quality control processes and are formulated to meet stringent national and international regulatory standards. We believe that quality is non-negotiable. By leveraging advanced technologies, a skilled R&D team, and a robust distribution network, we ensure the timely and consistent delivery of safe, effective medicines to every corner of India.
+    </p>
+  </div>
+
+  {/* Paragraph 5 */}
+  <div>
+    <p>
+      <span className="font-bold text-black block mb-1">Our Core Values</span>
+      Our operations are guided by a commitment to ethical practices, continuous improvement, and patient-centric innovation. We are driven by four pillars of excellence:
+    </p>
+    <ul className="list-disc list-outside pl-5 flex flex-col gap-2 mt-2">
+      <li className="pl-1">
+        <strong>Integrity:</strong> Upholding transparency in every business interaction.
+      </li>
+      <li className="pl-1">
+        <strong>Innovation:</strong> Constantly seeking newer, better ways to heal.
+      </li>
+      <li className="pl-1">
+        <strong>Quality:</strong> Adhering to global standards of safety.
+      </li>
+      <li className="pl-1">
+        <strong>Compassion:</strong> Placing the patient’s well-being at the heart of everything we do.
+      </li>
+    </ul>
+  </div>
+
+  {/* Paragraph 7 (Skipped Para 6 as it was a duplicate of Para 4) */}
+  <div>
+    <p>
+      With a growing portfolio and an expanding footprint, DWEPS Pharmaceutical Pvt. Ltd. is poised to emerge as a trusted household name in both domestic and global pharmaceutical markets, ensuring that better health is always within reach.
+    </p>
+  </div>
+
+</div>
+        </div>
+
+        <div className='flex flex-col gap-4'>
+           <div className='text-center mt-8 mb-4'>
+    <h2 className='relative group inline-block font-heading font-bold text-2xl'>
+        Our Mission Vision
+        
+        {/* FIX: 
+            1. Removed 'scale-x' and 'transform' 
+            2. Added 'left-1/2' and '-translate-x-1/2' to keep it centered
+            3. Animating 'w-0' (width 0) to 'w-full' (width 100%) 
+        */}
+        <span className='absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-[width] duration-300 -translate-x-1/2 ease-out'></span>
+    </h2>
+</div>
+            <div className='flex gap-8 md:flex-row flex-col md:px-0 px-4'>
+                {/* card-1 */}
+                <div className='relative group overflow-hidden flex flex-col gap-2 border border-1 
+                border-blue-500 px-4 py-4 rounded-md transition transform duration-300 hover:scale-105 shadow-md'>
+                    <span className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                    {/* icon */}
+                    <div className='flex items-center justify-center'>
+                        <Image src="/bullseye-solid-full.svg" width={20} height={20} className='w-20 h-20'/>
+                    </div>
+
+                    {/* mission */}
+                    <div> 
+                        <h3 className='text-center text-xl font-medium'>Our Mission</h3>
+                    </div>
+
+                    {/* description */}
+
+                    <div>
+                        <p>To provide innovative, effective, and affordable medical solutions that enhance the quality of life. We are committed to delivering high-quality pharmaceutical products that meet international standards while remaining accessible to all.</p>
+                    </div>
+                </div>
+
+
+
+                {/* card-2 */}
+
+                <div className='relative group overflow-hidden flex flex-col gap-2 border border-1 px-4 py-2 border-blue-500 rounded-md transition transform duration-300 hover:scale-105 shadow-md'>
+                    <span className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
+                     {/* icon */}
+                    <div className='flex items-center justify-center'>
+                        <Image src="/eye-low-vision-solid-full.svg" width={20} height={20} className='w-20 h-20'/>
+                    </div>
+
+                    {/* mission */}
+                    <div> 
+                         <h3 className='text-center text-xl font-medium'>Our Vision</h3>
+                    </div>
+
+                    {/* description */}
+
+                    <div>
+                        <p>To be recognized as a trusted name in the Indian pharmaceutical industry for excellence in women's health, dermatology, a. We aspire to become a leading healthcare provider known for quality and innovation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+
+    
+         
         </>
       )
 }

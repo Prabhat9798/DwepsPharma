@@ -61,11 +61,12 @@ const WhyChooseUs = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 {/* 1. Header Section (Title & Intro) */}
-                <div className="text-left max-w-3xl  mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#1a237e] mb-4">
+                <div className="text-center flex items-center justify-center flex-col   mb-12">
+                    <h2 className="text-3xl lg:text-4xl font-bold text-blue-500 mb-4  font-bold  relative inline-block group cursor-pointer text-blue-500">
                         Why Choose Us
+                        <span className="absolute left-0 -bottom-1 h-[4px] bg-blue-600 transition-all duration-300 ease-in-out w-0 group-hover:w-full"></span>
                     </h2>
-                    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+                    <p className="text-sm md:text-base text-gray-700 leading-relaxed text-center max-w-4xl">
                         Dweps Pharmaceuticals is a trusted name in healthcare, delivering high-quality and affordable medicines across a wide range of therapeutic areas.
                     </p>
                 </div>

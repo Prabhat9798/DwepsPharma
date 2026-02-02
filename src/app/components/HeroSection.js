@@ -32,12 +32,12 @@ const HeroSection = () => {
             <div className="font-heading relative z-10 max-w-4xl px-6 md:ml-20 text-left">
                 
                 {/* Welcome Text */}
-                <p className="text-white text-4xl md:text-md mb-4 font-medium font-heading">
+                <p className="text-white text-2xl md:text-md mb-4 font-medium font-heading">
                     Welcome to Dweps Pharmaceuticals - An Admirable Company
                 </p>
 
                 {/* Main Headline */}
-                <h1 className="text-blue-500 text-5xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <h1 className="text-blue-500 text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                     Innovating Healthcare,
                     
                     Enhancing Lives
@@ -45,7 +45,7 @@ const HeroSection = () => {
 
                 {/* Description Paragraph */}
                 {/* CHANGE 3: Removed 'mx-auto' so the text block aligns left */}
-                <p className="text-white text-base md:text-base lg:text-base max-w-2xl leading-relaxed">
+                <p className="text-white text-sm md:text-base lg:text-base max-w-2xl leading-relaxed">
     Since our inception in November 2016, <strong>DWEPS Pharmaceutical Pvt Ltd</strong> has been at the forefront of delivering high-quality, affordable, and accessible healthcare solutions across India. 
  
     As an <strong>ISO 9001:2015 certified company</strong>, we are a trusted leader in women's healthcare, specializing exclusively in <em className="italic">advanced gynecological solutions</em>. Our portfolio features a wide range of high-efficacy <strong>injections and tablets</strong> designed to support women's health at every stage. We are dedicated to improving lives through integrity, innovation, and a relentless pursuit of excellence.

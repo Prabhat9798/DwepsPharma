@@ -42,8 +42,8 @@ const ProductCard = ({ card }) => {
             alt="Image not Found" 
             className="w-full h-full object-contain hover:scale-110 transition-transform duration-500" 
         />
-        <div className="absolute top-4 right-5 bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-heading shadow-sm">
-          10*15
+        <div className="absolute top-2 right-3 bg-blue-500/90 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                        10 * 10 Tablets
         </div>
       </div>
 
@@ -69,15 +69,15 @@ const ProductCard = ({ card }) => {
 const Page = () => {
   // Added 'description' to data for the tooltip
   const cards = [
-    { id: 1, img: "/wefi.jpeg", title: "Wefi", description: "High-performance wireless module." },
-    { id: 2, img: "/docq.jpeg", title: "Docq", description: "Advanced document management." },
-    { id: 3, img: "/mosetal.jpeg", title: "mosetal", description: "Industrial grade metal alloy." },
-    { id: 4, img: "/lute.jpeg", title: "lute", description: "Premium audio interface." },
-    { id: 5, img: "/lute-400.jpeg", title: "lute-400", description: "Enhanced version with 400 series." },
-    { id: 6, img: "/depiston.jpeg", title: "depiston", description: "Precision engine piston." },
-    { id: 7, img: "/wefi.jpeg", title: "Wefi", description: "High-performance wireless module." },
-    { id: 8, img: "/docq.jpeg", title: "Docq", description: "Advanced document management." },
-    { id: 9, img: "/mosetal.jpeg", title: "mosetal", description: "Industrial grade metal alloy." },
+    { id: 1, img: "/wefi.jpeg", title: "Wefi-XT", description: "High-performance wireless module." },
+    { id: 2, img: "/docq.jpeg", title: "DOCQ-L", description: "Advanced document management." },
+    { id: 3, img: "/mosetal.jpeg", title: "MOSETAL-M", description: "Industrial grade metal alloy." },
+    { id: 4, img: "/lute.jpeg", title: "Luteomone SR-200", description: "Premium audio interface." },
+    { id: 5, img: "/lute-400.jpeg", title: "Luteomone -400", description: "Enhanced version with 400 series." },
+    { id: 6, img: "/depiston.jpeg", title: "Depiston-75", description: "Precision engine piston." },
+    { id: 7, img: "/wefi.jpeg", title: "Wefi-XT", description: "High-performance wireless module." },
+    { id: 8, img: "/docq.jpeg", title: "DOCQ-L", description: "Advanced document management." },
+    { id: 9, img: "/mosetal.jpeg", title: "MOSETAL-M", description: "Industrial grade metal alloy." },
     { id: 10, img: "/lute.jpeg", title: "lute", description: "Premium audio interface." },
     { id: 11, img: "/lute-400.jpeg", title: "lute-400", description: "Enhanced version with 400 series." },
     { id: 12, img: "/depiston.jpeg", title: "depiston", description: "Precision engine piston." }

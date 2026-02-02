@@ -183,8 +183,8 @@ const Navbar = () => {
                                 
                                 {/* Collapsible Content */}
                                 <div className={`overflow-hidden transition-all duration-300 ${isMobileGyneOpen ? 'max-h-40 opacity-100 mt-1' : 'max-h-0 opacity-0'}`}>
-                                    <Link href="/products/gynecological/injection" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Injection</Link>
-                                    <Link href="/products/gynecological/tablets" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Tablets</Link>
+                                    <Link href="/products" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Injection</Link>
+                                    <Link href="/products" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Tablets</Link>
                                 </div>
                             </div>
                         </div>

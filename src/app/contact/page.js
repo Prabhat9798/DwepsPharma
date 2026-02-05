@@ -68,7 +68,7 @@ const ContactPage = () => {
         
         {/* Hexagonal grid pattern */}
         <div
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-0"
             style={{
                 backgroundImage: `
                     linear-gradient(30deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1)),
@@ -81,31 +81,17 @@ const ContactPage = () => {
             }}
         />
 
-        {/* Scattered dots */}
-        <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-                <div
-                    key={i}
-                    className="absolute rounded-full bg-[#049fe5] opacity-30"
-                    style={{
-                        width: `${Math.random() * 8 + 4}px`,
-                        height: `${Math.random() * 8 + 4}px`,
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                    }}
-                />
-            ))}
-        </div>
+       
     </div>
 
     {/* 2. TEXT CONTENT (Added 'relative' and 'z-10') */}
     <div className='relative z-10 font-heading flex flex-col items-center justify-center px-4 py-12 lg:py-20 md:py-16 gap-4 text-center'>
-        <h2 className='text-2xl md:text-3xl font-medium text-[#1a237e]'>
+        <h2 className='text-2xl md:text-4xl font-medium text-[#1a237e]'>
             Contact
         </h2>
         
         {/* Breadcrumb style */}
-        <p className="text-sm font-medium text-[#049fe5]">
+        <p className="text-lg font-medium text-[#049fe5]">
             Home / Contact 
         </p>
 

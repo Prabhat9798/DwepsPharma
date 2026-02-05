@@ -14,7 +14,7 @@ const page = () => {
         
         {/* Hexagonal grid pattern */}
         <div
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-0"
             style={{
                 backgroundImage: `
                     linear-gradient(30deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1)),
@@ -27,31 +27,17 @@ const page = () => {
             }}
         />
 
-        {/* Scattered dots */}
-        <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-                <div
-                    key={i}
-                    className="absolute rounded-full bg-[#049fe5] opacity-30"
-                    style={{
-                        width: `${Math.random() * 8 + 4}px`,
-                        height: `${Math.random() * 8 + 4}px`,
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                    }}
-                />
-            ))}
-        </div>
+        
     </div>
 
     {/* 2. TEXT CONTENT (Added 'relative' and 'z-10') */}
     <div className='relative z-10 font-heading flex flex-col items-center justify-center px-4 py-12 lg:py-20 md:py-16 gap-4 text-center'>
-        <h2 className='text-2xl md:text-3xl font-medium text-[#1a237e]'>
+        <h2 className='text-2xl md:text-4xl font-medium text-[#1a237e]'>
             About Us
         </h2>
         
         {/* Breadcrumb style */}
-        <p className="text-sm font-medium text-[#049fe5]">
+        <p className="text-lg font-medium text-[#049fe5]">
             Home / About 
         </p>
 
@@ -173,7 +159,7 @@ const page = () => {
                     <span className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
                     {/* icon */}
                     <div className='flex items-center justify-center'>
-                        <Image src="/bullseye-solid-full.svg" width={20} height={20} className='w-20 h-20'/>
+                        <Image src="/bullseye-solid-full.svg" alt='img' width={20} height={20} className='w-20 h-20'/>
                     </div>
 
                     {/* mission */}
@@ -196,7 +182,7 @@ const page = () => {
                     <span className="absolute top-0 left-0 w-full h-1 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"></span>
                      {/* icon */}
                     <div className='flex items-center justify-center'>
-                        <Image src="/eye-low-vision-solid-full.svg" width={20} height={20} className='w-20 h-20'/>
+                        <Image src="/eye-low-vision-solid-full.svg" alt='image' width={20} height={20} className='w-20 h-20'/>
                     </div>
 
                     {/* mission */}

@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
 
                     {/* Center Column (Image) */}
                     <div className="order-1 lg:order-2 flex justify-center py-6 lg:py-0">
-                        <div className="relative w-full max-w-md aspect-[5/5] md:aspect-square lg:aspect-[4/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <div className="relative w-full max-w-md aspect-[5/5] md:aspect-square lg:aspect-[4/4] rounded-2xl overflow-hidden">
                             <Image
                                 src="/banner.jpg"
                                 alt="Pharmaceutical Laboratory"

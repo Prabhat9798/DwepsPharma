@@ -11,17 +11,17 @@ const Blogs = () => {
         
         {/* Section Title */}
         <div className="flex flex-col items-center justify-center mb-12 gap-4">
-<h2 className="text-xl font-bold lg:text-3xl relative inline-block group cursor-pointer text-blue-500">
+<h2 className="text-4xl font-bold lg:text-4xl relative inline-block group cursor-pointer text-blue-500">
               Health Solutions You Can Trust
             <span className="absolute left-0 -bottom-1 h-[4px] bg-blue-600 transition-all duration-300 ease-in-out w-0 group-hover:w-full"></span>
           </h2>
         </div>
 
         {/* Cards Grid - Added 'mx-auto' here to center it */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto ">
           
           {/* --- CARD 1: INJECTION --- */}
-          <Link href="/products/gynecological/injection" className="group relative w-full h-64 md:h-80 rounded-sm overflow-hidden shadow-lg cursor-pointer">
+          <Link href="/injections" className="group relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg cursor-pointer">
             
             {/* Background Image */}
             <div className="absolute inset-0">
@@ -47,7 +47,7 @@ const Blogs = () => {
 
 
           {/* --- CARD 2: GYNECOLOGICAL --- */}
-          <Link href="/products/gynecological" className="group relative w-full h-64 md:h-80 rounded-sm overflow-hidden shadow-lg cursor-pointer">
+          <Link href="/products" className="group relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg cursor-pointer">
             
             {/* Background Image */}
             <div className="absolute inset-0">

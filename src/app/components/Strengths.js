@@ -58,7 +58,7 @@ const Strengths = () => {
   return (
     <section id="services" className="w-full py-12 md:py-16 lg:py-20 bg-gray-50 font-heading">
        <div className='text-center flex flex-col gap-2 mb-8'>
-          <h2 className='text-center font-bold text-3xl'>At a Glance</h2>
+          <h2 className='text-center font-bold text-4xl text-blue-500'>At a Glance</h2>
           <p className='text-lg font-semibold leading-relaxed'>Trusted by IVF clinics, gynecologist and IVF specialist doctors & distributors across India
 
           </p>

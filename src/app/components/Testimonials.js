@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import React, { useState, useEffect, useCallback } from 'react'
 import Tilt from 'react-parallax-tilt'
 
@@ -8,36 +7,37 @@ const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [itemsPerPage, setItemsPerPage] = useState(1)
 
+    // 1. Updated Data: Added 'gender' property
     const testimonials = [
         {
             quote: "I've prescribed Dweps products for over a year now. The results in patients have been consistently positive with minimal side effects.",
             name: "Dr. Akash Patil",
             address: "Mumbai, India",
-            img: "/samplephoto.jpg"
+            gender: "male"
         },
         {
             quote: "We've partnered with Dweps for our clinic's pharmaceutical needs, and it's been a smooth experience. Great range and great quality!",
             name: "Sonal Gupta",
             address: "New Delhi, India",
-            img: "/samplephoto.jpg"
+            gender: "female"
         },
         {
             quote: "Dweps Pharmaceuticals has become our go-to supplier. Their medicines are not only effective but also reasonably priced. Truly dependable!",
             name: "Dr. Anjali Mehta",
             address: "Bengaluru, India",
-            img: "/samplephoto.jpg"
+            gender: "female"
         },
         {
             quote: "The quality of packaging and the efficacy of the drugs are top-notch. My patients have shown great recovery rates.",
             name: "Dr. Rajesh Kumar",
             address: "Chennai, India",
-            img: "/samplephoto.jpg"
+            gender: "male"
         },
         {
             quote: "Reliable service and excellent product standards. Highly recommended for fellow practitioners.",
             name: "Dr. Priya Singh",
             address: "Pune, India",
-            img: "/samplephoto.jpg"
+            gender: "female"
         }
     ]
 
@@ -93,37 +93,7 @@ const Testimonials = () => {
     return (
         <section className="w-full py-12 md:py-16 lg:py-20 relative overflow-hidden font-heading">
             {/* Background with gradient and pattern */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#e3f2fd] via-[#bbdefb] to-[#90caf9]">
-                {/* Hexagonal grid pattern overlay */}
-                <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage: `
-              linear-gradient(30deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1)),
-              linear-gradient(150deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1)),
-              linear-gradient(30deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1)),
-              linear-gradient(150deg, rgba(4, 159, 229, 0.1) 12%, transparent 12.5%, transparent 87%, rgba(4, 159, 229, 0.1) 87.5%, rgba(4, 159, 229, 0.1))
-            `,
-                        backgroundSize: '80px 140px',
-                        backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px'
-                    }}
-                />
-                {/* Scattered dots */}
-                <div className="absolute inset-0">
-                    {[...Array(20)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute rounded-full bg-[#049fe5] opacity-30"
-                            style={{
-                                width: `${Math.random() * 8 + 4}px`,
-                                height: `${Math.random() * 8 + 4}px`,
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
+           
 
             {/* Content */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -198,7 +168,7 @@ const Testimonials = () => {
     )
 }
 
-// Testimonial Card Component (Unchanged logic, just ensure full height)
+// Testimonial Card Component
 const TestimonialCard = ({ testimonial }) => {
     return (
         <Tilt
@@ -213,19 +183,26 @@ const TestimonialCard = ({ testimonial }) => {
             glareBorderRadius='8px'
             className='h-full'
         >
-            <div className="bg-white/40 bg-gradient-to-br from-white/90 via-white/70 to-blue-100/30 backdrop-blur-xl rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col justify-between transform transition-transform duration-300 border border-white/50">
+            <div className="bg-white/40 backdrop-blur-xl rounded-2xl shadow-xl p-6 md:p-8 h-full flex flex-col justify-between transform transition-transform duration-300 border border-white/50">
                 
                 <div>
                     <div className='flex items-center justify-between mb-4'>
-                        {/* Image */}
+                        
+                        {/* 2. REPLACED IMAGE WITH AVATAR ICONS */}
                         <div className="relative w-16 h-16 flex-shrink-0">
-                            <Image
-                                src={testimonial.img}
-                                alt={testimonial.name}
-                                fill
-                                className="rounded-full object-cover border-2 border-[#1a237e]"
-                                sizes="64px"
-                            />
+                            {testimonial.gender === 'male' ? (
+                                <div className="w-full h-full rounded-full bg-blue-100 flex items-center justify-center border-2 border-[#1a237e] text-[#1a237e]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+                                        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                            ) : (
+                                <div className="w-full h-full rounded-full bg-pink-100 flex items-center justify-center border-2 border-[#1a237e] text-[#1a237e]">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10">
+                                        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd" />
+                                    </svg>
+                                </div>
+                            )}
                         </div>
 
                         {/* Star Rating */}

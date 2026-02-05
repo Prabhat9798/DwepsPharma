@@ -1,13 +1,62 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const [isMobileGyneOpen, setIsMobileGyneOpen] = useState(false) // State for Mobile Sub-dropdown
+    const [isMobileGyneOpen, setIsMobileGyneOpen] = useState(false) 
     const pathname = usePathname()
+    const router = useRouter()
+
+    // --- Search State ---
+    const [searchQuery, setSearchQuery] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const searchRef = useRef(null);
+
+    // --- Search Logic ---
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(async () => {
+            if (searchQuery.trim().length > 1) { // Only search if more than 1 char
+                try {
+                    const res = await fetch(`/api/search?q=${searchQuery}`);
+                    const data = await res.json();
+                    if (data.success) {
+                        setSuggestions(data.data);
+                        setShowSuggestions(true);
+                    }
+                } catch (error) {
+                    console.error("Search error:", error);
+                }
+            } else {
+                setSuggestions([]);
+                setShowSuggestions(false);
+            }
+        }, 300); // 300ms delay to reduce API calls
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchQuery]);
+
+    // Close suggestions when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setShowSuggestions(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    // Function to handle Enter key
+    const handleSearchSubmit = (e) => {
+        if (e.key === 'Enter' && searchQuery) {
+            router.push(`/products?search=${searchQuery}`); // Optional: Go to a full search results page
+            setShowSuggestions(false);
+        }
+    };
 
     // --- Active Link Logic ---
     const getLinkClasses = (path) => {
@@ -17,7 +66,7 @@ const Navbar = () => {
         }`;
     };
 
-    // --- Search Animation Logic ---
+    // --- Search Animation Logic (Placeholder) ---
     const [inputValue, setInputValue] = useState("");
     const [index, setIndex] = useState(0);
     const fullText = "Search for Products...";
@@ -41,7 +90,7 @@ const Navbar = () => {
     return (
         <nav className="bg-white/95 backdrop-blur-md shadow-md w-full font-heading sticky top-0 z-50 border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-0 ">
-                <div className="flex items-center justify-between  gap-6">
+                <div className="flex items-center justify-between gap-6">
 
                     {/* --- Logo --- */}
                     <div className="shrink-0">
@@ -49,24 +98,61 @@ const Navbar = () => {
                             <Image
                                 src="/dwepsl.png"
                                 alt="DWEPS Logo"
-                                width={110}
-                                height={110}
-                                className="w-24 md:w-28 h-auto object-contain"
+                                width={100}
+                                height={100}
+                                className="w-20 md:w-24 h-auto object-contain"
                                 priority
                             />
                         </Link>
                     </div>
 
-                    {/* --- Desktop Search Bar --- */}
-                    <div className='hidden md:flex flex-1 max-w-sm bg-gray-50 border border-gray-200 rounded-full px-4 py-2 items-center focus-within:ring-2 focus-within:ring-[#049fe5]/20 focus-within:border-[#049fe5] transition-all'>
-                        <input 
-                            type='search' 
-                            placeholder={inputValue} 
-                            className='flex-1 bg-transparent border-none outline-none text-sm text-gray-700 placeholder-gray-400'
-                        />
-                        <div className='bg-[#049fe5] p-1.5 rounded-full cursor-pointer hover:bg-[#038bc8] transition-colors'>
-                            <Image src='/Search2.webp' alt='search' width={14} height={14} className='invert brightness-0'/>
+                    {/* --- Desktop Search Bar with Suggestions --- */}
+                    <div className='hidden md:block flex-1 max-w-sm relative' ref={searchRef}>
+                        <div className='flex bg-gray-50 border border-gray-200 rounded-full px-4 py-2 items-center focus-within:ring-2 focus-within:ring-[#049fe5]/20 focus-within:border-[#049fe5] transition-all'>
+                            <input 
+                                type='search' 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyDown={handleSearchSubmit}
+                                placeholder={inputValue} 
+                                className='flex-1 bg-transparent border-none outline-none text-sm text-gray-700 placeholder-gray-400'
+                            />
+                            <div className='bg-[#049fe5] p-1.5 rounded-full cursor-pointer hover:bg-[#038bc8] transition-colors'>
+                                <Image src='/Search2.webp' alt='search' width={14} height={14} className='invert brightness-0'/>
+                            </div>
                         </div>
+
+                        {/* ✅ SUGGESTIONS DROPDOWN */}
+                        {showSuggestions && suggestions.length > 0 && (
+                            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50">
+                                {suggestions.map((product) => (
+                                    <Link 
+                                        key={product._id} 
+                                        href={`/products/${product._id}`}
+                                        className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 border-b border-gray-50 last:border-0 transition-colors"
+                                        onClick={() => {
+                                            setShowSuggestions(false);
+                                            setSearchQuery(""); // Clear search on click
+                                        }}
+                                    >
+                                        <div className="w-10 h-10 relative bg-gray-50 rounded-md p-1 border border-gray-200">
+                                            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-contain" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold text-gray-800">{product.name}</p>
+                                            <p className="text-xs text-gray-500">{product.category} • {product.form}</p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                        
+                        {/* No Results State */}
+                        {showSuggestions && searchQuery.length > 1 && suggestions.length === 0 && (
+                             <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 p-4 text-center text-sm text-gray-500 z-50">
+                                No products found for "{searchQuery}"
+                             </div>
+                        )}
                     </div>
 
                     {/* --- Desktop Navigation --- */}
@@ -77,45 +163,33 @@ const Navbar = () => {
 
                         {/* === PRODUCTS DROPDOWN === */}
                         <div className="relative group h-full flex items-center">
-                            <Link 
-                                href="/products" 
-                                className={`flex items-center gap-1 ${getLinkClasses('/products')}`}
-                            >
+                            <Link href="/products" className={`flex items-center gap-1 ${getLinkClasses('/products')}`}>
                                 Products
                                 <svg className="w-3 h-3 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                 </svg>
                             </Link>
 
-                            {/* Dropdown Container (Invisible bridge included) */}
+                            {/* Dropdown Container */}
                             <div className="absolute left-0 top-full w-64 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                                 <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-visible py-2">
-                                    
-                                    {/* --- Nested Menu: Gynecological --- */}
                                     <div className="relative group/nested">
                                         <div className="px-5 py-3 flex items-center justify-between text-gray-700 hover:bg-gray-50 hover:text-[#049fe5] cursor-pointer transition-colors">
-                                            {/* Made the header clickable too */}
-                                            <Link href="/products/gynecological" className="font-medium flex-1">
+                                            <Link href="/products?category=Gynecology" className="font-medium flex-1">
                                                 Gynecological Services
                                             </Link>
                                             <svg className="w-3 h-3 text-gray-400 group-hover/nested:text-[#049fe5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
                                         </div>
-
-                                        {/* Desktop Sub-Menu (Side Popup) */}
+                                        {/* Desktop Sub-Menu */}
                                         <div className="absolute left-full top-0 w-56 pl-2 opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-300 transform -translate-x-2 group-hover/nested:translate-x-0">
                                             <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-2">
-                                                <Link href="/products" className="block px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#049fe5] transition-colors">
-                                                    Injection
-                                                </Link>
-                                                <Link href="/products" className="block px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#049fe5] transition-colors">
-                                                    Tablets
-                                                </Link>
+                                                <Link href="/products?form=Injection" className="block px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#049fe5] transition-colors">Injection</Link>
+                                                <Link href="/products?form=Tablet" className="block px-5 py-2.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-[#049fe5] transition-colors">Tablets</Link>
                                             </div>
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -125,10 +199,7 @@ const Navbar = () => {
 
                     {/* --- CTA Button --- */}
                     <div className="hidden md:flex">
-                        <a 
-                            href="tel:+917209121333" 
-                            className="flex items-center gap-2 bg-[#049fe5] hover:bg-[#038bc8] text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg active:scale-95"
-                        >
+                        <a href="tel:+917209121333" className="flex items-center gap-2 bg-[#049fe5] hover:bg-[#038bc8] text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg active:scale-95">
                             <Image src='/phone-call.png' alt='phone' width={16} height={16} className="invert brightness-0" />
                             <span className="text-sm">+91 72091 21333</span>
                         </a>
@@ -136,16 +207,9 @@ const Navbar = () => {
 
                     {/* --- Mobile Menu Toggle --- */}
                     <div className="md:hidden flex items-center">
-                        <button 
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-                            className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none"
-                        >
+                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                {isMobileMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                )}
+                                {isMobileMenuOpen ? (<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />) : (<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />)}
                             </svg>
                         </button>
                     </div>
@@ -154,7 +218,7 @@ const Navbar = () => {
                 {/* --- Mobile Menu --- */}
                 <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[600px] opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
                     
-                    {/* Mobile Search */}
+                    {/* Mobile Search - (You can add the same suggestion logic here if needed) */}
                     <div className='flex bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 mb-4'>
                         <input type='search' placeholder="Search..." className='flex-1 bg-transparent border-none outline-none text-sm' />
                         <Image src='/Search2.webp' alt='search' width={16} height={16} />
@@ -165,37 +229,24 @@ const Navbar = () => {
                         <Link href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
                         <Link href="/services" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
                         
-                        {/* Mobile Products Accordion */}
                         <div className="bg-gray-50 rounded-lg p-3 mt-2">
                             <Link href="/products" className="block text-base font-bold text-[#049fe5] mb-2" onClick={() => setIsMobileMenuOpen(false)}>Products</Link>
-                            
-                            {/* --- Gynecological Mobile Dropdown --- */}
                             <div className="pl-3 border-l-2 border-gray-200">
-                                <button 
-                                    onClick={() => setIsMobileGyneOpen(!isMobileGyneOpen)}
-                                    className="flex items-center justify-between w-full py-2 text-sm font-bold text-gray-600 hover:text-[#049fe5]"
-                                >
+                                <button onClick={() => setIsMobileGyneOpen(!isMobileGyneOpen)} className="flex items-center justify-between w-full py-2 text-sm font-bold text-gray-600 hover:text-[#049fe5]">
                                     Gynecological Services
-                                    <svg className={`w-4 h-4 transition-transform duration-200 ${isMobileGyneOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                    </svg>
+                                    <svg className={`w-4 h-4 transition-transform duration-200 ${isMobileGyneOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                                 </button>
-                                
-                                {/* Collapsible Content */}
                                 <div className={`overflow-hidden transition-all duration-300 ${isMobileGyneOpen ? 'max-h-40 opacity-100 mt-1' : 'max-h-0 opacity-0'}`}>
-                                    <Link href="/products" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Injection</Link>
-                                    <Link href="/products" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Tablets</Link>
+                                    <Link href="/products?form=Injection" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Injection</Link>
+                                    <Link href="/products?form=Tablet" className="block py-2 pl-2 text-sm text-gray-500 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>• Tablets</Link>
                                 </div>
                             </div>
                         </div>
-
                         <Link href="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#049fe5]" onClick={() => setIsMobileMenuOpen(false)}>Contact Us</Link>
                     </div>
-
                     <div className="mt-6">
                         <a href="tel:+917209121333" className="flex items-center justify-center gap-2 w-full bg-[#049fe5] text-white py-3 rounded-lg font-medium shadow-sm">
-                            <Image src='/phone-call.png' alt='phone' width={18} height={18} className='invert brightness-0'/>
-                            +91 72091 21333
+                            <Image src='/phone-call.png' alt='phone' width={18} height={18} className='invert brightness-0'/> +91 72091 21333
                         </a>
                     </div>
                 </div>
